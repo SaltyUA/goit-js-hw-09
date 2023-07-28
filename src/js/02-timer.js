@@ -12,6 +12,7 @@ const timerEl = {
 };
 
 startBtnEl.disabled = true;
+let pickedDate;
 
 function convertMs(ms) {
   const second = 1000;
