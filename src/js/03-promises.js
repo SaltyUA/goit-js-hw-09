@@ -30,7 +30,7 @@ function startCreate(event) {
   };
 
   let promDelay = inputValues.delay;
-  for (i = 1; i <= inputValues.amount; i += 1) {
+  for (let i = 1; i <= inputValues.amount; i += 1) {
     createPromise(i, inputValues.delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(
