@@ -13,6 +13,7 @@ const timerEl = {
 
 startBtnEl.disabled = true;
 let pickedDate;
+let dateDiff;
 
 function convertMs(ms) {
   const second = 1000;
