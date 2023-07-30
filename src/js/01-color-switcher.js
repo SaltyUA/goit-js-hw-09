@@ -9,11 +9,11 @@ const stopBtnEl = document.querySelector(`button[data-stop]`);
 
 startBtnEl.addEventListener(`click`, startSwitch);
 stopBtnEl.addEventListener(`click`, stopSwitch);
-
+let timerId = null;
 function startSwitch() {
   startBtnEl.disabled = true;
 
-  const timerId = setInterval(() => {
+  timerId = setInterval(() => {
     document.querySelector(`body`).style.backgroundColor = getRandomHexColor();
   }, 1000);
 }
