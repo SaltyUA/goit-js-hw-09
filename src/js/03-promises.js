@@ -29,6 +29,9 @@ function startCreate(event) {
     amount: Number(amount.value),
   };
 
+  if (inputValues.delay < 0 || inputValues.step < 0 || inputValues.amout <= 0) {
+    return Notiflix.Report.failure(`❌Pick integral values only`);
+  }
   let promDelay = inputValues.delay;
   for (let i = 1; i <= inputValues.amount; i += 1) {
     createPromise(i, inputValues.delay)
