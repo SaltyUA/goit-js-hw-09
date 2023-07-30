@@ -13,7 +13,7 @@ stopBtnEl.addEventListener(`click`, stopSwitch);
 function startSwitch() {
   startBtnEl.disabled = true;
 
-  timerId = setInterval(() => {
+  const timerId = setInterval(() => {
     document.querySelector(`body`).style.backgroundColor = getRandomHexColor();
   }, 1000);
 }

@@ -3,7 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 const startBtnEl = document.querySelector(`button[data-start]`);
-
+const selectEl = document.querySelector(`input[type="text"]`);
 const timerEl = {
   days: document.querySelector(`span[data-days]`),
   hours: document.querySelector(`span[data-hours]`),
@@ -45,21 +45,11 @@ flatpickr(`input[type="text"]`, {
     }
     startBtnEl.disabled = false;
     pickedDate = selectedDates[0];
-    dateDiff = pickedDate - new Date();
-    timerEl.days.textContent = `${convertMs(dateDiff).days}`.padStart(2, '0');
-    timerEl.hours.textContent = `${convertMs(dateDiff).hours}`.padStart(2, '0');
-    timerEl.minutes.textContent = `${convertMs(dateDiff).minutes}`.padStart(
-      2,
-      '0'
-    );
-    timerEl.seconds.textContent = `${convertMs(dateDiff).seconds}`.padStart(
-      2,
-      '0'
-    );
   },
 });
 
 function timerCount() {
+  selectEl.disabled = true;
   dateDiff = pickedDate - new Date();
   timerEl.days.textContent = `${convertMs(dateDiff).days}`.padStart(2, '0');
   timerEl.hours.textContent = `${convertMs(dateDiff).hours}`.padStart(2, '0');
