@@ -3,7 +3,9 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 const startBtnEl = document.querySelector(`button[data-start]`);
+const resetBtnEl = document.querySelector(`button[data-reset]`);
 const selectEl = document.querySelector(`input[type="text"]`);
+
 const timerEl = {
   days: document.querySelector(`span[data-days]`),
   hours: document.querySelector(`span[data-hours]`),
@@ -14,6 +16,7 @@ const timerEl = {
 startBtnEl.disabled = true;
 let pickedDate;
 let dateDiff;
+let timerId = null;
 
 function convertMs(ms) {
   const second = 1000;
@@ -50,6 +53,11 @@ flatpickr(`input[type="text"]`, {
 
 function timerCount() {
   selectEl.disabled = true;
+  if (pickedDate <= new Date()) {
+    selectEl.disabled = false;
+    clearInterval(timerId);
+    return;
+  }
   dateDiff = pickedDate - new Date();
   timerEl.days.textContent = `${convertMs(dateDiff).days}`.padStart(2, '0');
   timerEl.hours.textContent = `${convertMs(dateDiff).hours}`.padStart(2, '0');
@@ -61,13 +69,21 @@ function timerCount() {
     2,
     '0'
   );
-  if (dateDiff === 0) {
-    clearInterval(timerId);
-  }
 }
 
 startBtnEl.addEventListener(`click`, startTimer);
 
 function startTimer() {
-  const timerId = setInterval(timerCount, 1000);
+  timerId = setInterval(timerCount, 1000);
+}
+
+resetBtnEl.addEventListener(`click`, resetTimer);
+
+function resetTimer() {
+  selectEl.disabled = false;
+  clearInterval(timerId);
+  timerEl.days.textContent = `00`;
+  timerEl.hours.textContent = `00`;
+  timerEl.minutes.textContent = `00`;
+  timerEl.seconds.textContent = `00`;
 }

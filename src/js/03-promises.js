@@ -29,7 +29,11 @@ function startCreate(event) {
     amount: Number(amount.value),
   };
 
-  if (inputValues.delay < 0 || inputValues.step < 0 || inputValues.amout <= 0) {
+  if (
+    inputValues.delay < 0 ||
+    inputValues.step < 0 ||
+    inputValues.amount <= 0
+  ) {
     return Notiflix.Report.failure(`❌Pick integral values only`);
   }
   let promDelay = inputValues.delay;
@@ -46,6 +50,5 @@ function startCreate(event) {
         );
       });
     inputValues.delay += inputValues.step;
-    event.currentTarget.reset();
   }
 }
